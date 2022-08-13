@@ -1,5 +1,5 @@
-<h1 align="centre">GDBank</h1>
-<h2 align="centre">An online banking sandbox</h2>
+<h1 align="center">GDBank</h1>
+<h2 align="center">An online banking sandbox</h2>
 
 <h2>Features</h2>
 <ul>
