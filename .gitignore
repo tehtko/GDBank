@@ -352,3 +352,5 @@ MigrationBackup/
 # User added
 appsettings.Development.json
 appsettings.json
+Views/Home/Signup.cshtml
+.vscode/tasks.json
