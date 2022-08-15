@@ -354,3 +354,4 @@ appsettings.Development.json
 appsettings.json
 Views/Home/Signup.cshtml
 .vscode/tasks.json
+.vscode/launch.json
