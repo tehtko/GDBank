@@ -28,11 +28,6 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult FAQ()
-    {
-        return View();
-    }
-
     public IActionResult Debit()
     {
         return View();
