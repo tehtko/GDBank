@@ -2,11 +2,43 @@
     ViewData["Title"] = "GD Personal Banking";
 }
 
-<div id="card">
-    <h2 class="display-8 text-danger pt-4">Personal Banking</h2>
-    <div class="d-inline-flex flex-column">
+<style>
+    #card {
+        max-width: 1580px;
+    }
+
+    #bg-image {
+        position: absolute;
+        height: 400px;
+        width: 700px;
+        right: 0;
+    }
+
+    #block {
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        right: 520px;
+        top: 150px;
+        z-index: 1;
+    }
+
+    #block>h1 {
+        padding-left: 20px;
+    }
+</style>
+
+<div class="d-inline-flex flex-row" id="card">
+    <div class="d-inline-flex flex-column mt-5" id="intro">
+        <h2 class="display-8 text-danger pt-4">Personal Banking</h2>
         <a class="text-center text-decoration-none mt-4 border border-danger bg-danger text-white h5 p-2"
             asp-action="Login">Login</a>
-        <a class="text-decoration-none mt-2 text-danger h5 p-2" href="Signup">Signup ></a>
+        <a class="text-center text-decoration-none mt-2 text-danger h5 p-2" href="Signup">Signup ></a>
+    </div>
+    <div id="bg-image-container">
+        <div class="bg-danger" id="block">
+            <h1 class="text-white bold pt-5 pl-5 font-weight-bold">Put your finances <br> first.</h3>
+        </div>
+        <img id="bg-image" src="https://all.accor.com/middleware/media/1385727404495/1621581329344/ny.jpg" />
     </div>
 </div>
