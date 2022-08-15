@@ -3,42 +3,36 @@
 }
 
 <style>
-    #card {
-        max-width: 1580px;
+    #home-container {
+        max-width: 1600px;
+        height: 350px;
     }
 
-    #bg-image {
-        position: absolute;
-        height: 400px;
-        width: 700px;
-        right: 0;
+    #intro {
+        max-width: 1200px;
     }
 
-    #block {
-        position: absolute;
-        width: 250px;
-        height: 250px;
-        right: 520px;
-        top: 150px;
-        z-index: 1;
-    }
-
-    #block>h1 {
-        padding-left: 20px;
+    #logo {
+        height: 280px;
     }
 </style>
 
-<div class="d-inline-flex flex-row" id="card">
-    <div class="d-inline-flex flex-column mt-5" id="intro">
-        <h2 class="display-8 text-danger pt-4">Personal Banking</h2>
-        <a class="text-center text-decoration-none mt-4 border border-danger bg-danger text-white h5 p-2"
-            asp-action="Login">Login</a>
-        <a class="text-center text-decoration-none mt-2 text-danger h5 p-2" href="Signup">Signup ></a>
-    </div>
-    <div id="bg-image-container">
-        <div class="bg-danger" id="block">
-            <h1 class="text-white bold pt-5 pl-5 font-weight-bold">Put your finances <br> first.</h3>
+<div class="container d-flex justify-content-center" id="home-container">
+    <div class="row" id="intro">
+        <div class="d-inline-flex flex-column mt-5 col-3 text-center" id="intro-account">
+            <h3 class="text-danger pt-4">Personal Banking</h3>
+            <a class="text-center text-decoration-none mt-4 border border-danger bg-danger text-white h5 p-2"
+                asp-action="Login">Login</a>
+            <a class="text-center text-decoration-none mt-2 text-danger h5 p-2" href="Signup">Signup ></a>
         </div>
-        <img id="bg-image" src="https://all.accor.com/middleware/media/1385727404495/1621581329344/ny.jpg" />
+        <div class="col-3"></div>
+        <div class="col-3" id="intro-bg">
+            <img id="logo" src="https://i.ibb.co/w0JdfHj/q.png" />
+        </div>
+        <div>
+            <p class="text-danger display-4">Ready to kickstart your financial independance? Join GDBank for financial
+                tips, perks
+                and rewards.</p>
+        </div>
     </div>
 </div>
