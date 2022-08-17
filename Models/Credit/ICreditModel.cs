@@ -1,15 +1,14 @@
-namespace GDBank.Models
-{
-    public interface ICreditModel
-    {
-        public int Id { get; set; }
-        public int MonthLimit { get; set; }
-        public string AccountName { get; set; }
-        public string CardHolder { get; set; }
-        public float? CashBack { get; set; }
-        public float MonthlyFee { get; set; }
-        public float InterestRate { get; set; }
+namespace GDBank.Models;
 
-        public int AccountId { get; set; }
-    }
+public interface ICreditModel
+{
+    public int Id { get; set; }
+    public int MonthLimit { get; set; }
+    public string AccountName { get; set; }
+    public string CardHolder { get; set; }
+    public float? CashBack { get; set; }
+    public float MonthlyFee { get; set; }
+    public float InterestRate { get; set; }
+
+    public int AccountId { get; set; }
 }
