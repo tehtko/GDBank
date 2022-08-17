@@ -7,7 +7,8 @@ namespace GDBank.Models
         public string AccountName { get; set; }
         public string CardHolder { get; set; }
         public float? CashBack { get; set; }
-        public bool Overdraft { get; set; }
+        public float? MonthlyFee { get; set; }
+        public bool OverdraftProtection { get; set; }
 
         public int AccountId { get; set; }
     }
