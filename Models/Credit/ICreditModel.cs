@@ -2,7 +2,7 @@ namespace GDBank.Models;
 
 public interface ICreditModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public int MonthLimit { get; set; }
     public string AccountName { get; set; }
     public string CardHolder { get; set; }
