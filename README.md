@@ -3,7 +3,7 @@
 
 <h2>Features</h2>
 <ul>
-  <li>Transacting (Send/Recieve money)</li>
+  <li>Transacting (Send & Recieve money)</li>
   <li>Create accounts, credit lines</li>
   <li>Income reports, budgeting tips</li>
 </ul>
