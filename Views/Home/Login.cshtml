@@ -13,13 +13,13 @@
                 </div>
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-8 col-xl-6">
-                        <form>
+                        <form asp-controller="Account" asp-action="Login" method="post">
                             <div class="form-floating mb-3">
-                                <input class="form-control" placeholder="name@example.com" />
+                                <input asp-for="Email" class="form-control" placeholder="name@example.com" />
                                 <label for="email">Email or Access ID</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" placeholder="Password" />
+                                <input asp-for="Password" class="form-control" placeholder="Password" />
                                 <label for="phone">Password</label>
                             </div>
                             <div class="d-grid"><button class="btn btn-danger btn-lg disabled" id="submitButton"
