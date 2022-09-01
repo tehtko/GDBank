@@ -12,4 +12,14 @@ public class AccountController : Controller
     {
         _logger = logger;
     }
+
+    public IActionResult Login()
+    {
+        return View("Account");
+    }
+
+    public IActionResult Signup()
+    {
+        return View("Account");
+    }
 }
