@@ -1,4 +1,4 @@
-<h1 align="center">GDBank</h1>
+<h1 align="center">GDBank * WIP</h1>
 <h2 align="center">An online banking sandbox</h2>
 
 <h2>Features</h2>
