@@ -1,3 +1,4 @@
+@model GDBank.Models.AccountCreationModel
 <main class="flex-shrink-0">
     <!-- Page content-->
     <section class="py-5">
@@ -13,19 +14,23 @@
                     <div class="col-lg-8 col-xl-6">
                         <form asp-area="Account" asp-action="Signup" method="post">
                             <div class="form-floating mb-3">
-                                <input class="form-control" placeholder="Enter your name..." />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                                <input asp-for="FullName" class="form-control" placeholder="Enter your name..." />
                                 <label for="name">Full name</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" placeholder="name@example.com" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                                <input asp-for="Email" class="form-control" placeholder="name@example.com" />
                                 <label for="email">Email address</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" placeholder="Password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                                <input asp-for="Password" class="form-control" placeholder="Password" />
                                 <label for="phone">Password</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" placeholder="Confirm Password" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
                                 <label for="phone">Confirm Password</label>
                             </div>
                             <div class="d-grid"><button class="btn btn-danger btn-lg disabled" id="submitButton"
@@ -54,3 +59,9 @@
         </div>
     </div>
 </footer>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
