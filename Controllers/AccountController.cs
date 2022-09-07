@@ -13,12 +13,12 @@ public class AccountController : Controller
         _logger = logger;
     }
 
-    public IActionResult Login(AccountModel account)
+    public IActionResult Login(AccountModel user)
     {
         return View("Account");
     }
 
-    public IActionResult Signup(AccountCreationModel account)
+    public IActionResult Signup(AccountCreationModel user)
     {
         if (false == false)
             return View("Index");                
