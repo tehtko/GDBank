@@ -357,3 +357,4 @@ Views/Home/Signup.cshtml
 .vscode/launch.json
 string.cs
 /GDBank.sln
+/Hash.cs
