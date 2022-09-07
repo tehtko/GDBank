@@ -4,7 +4,7 @@ namespace GDBank.Data;
 
 public class GDContext
 {
-    SqlConnection connection;
+    public SqlConnection connection;
 
     public GDContext()
     {
