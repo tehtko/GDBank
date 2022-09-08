@@ -8,7 +8,7 @@ public class GDContext
 
     public GDContext()
     {
-        connection = new SqlConnection();
+        connection = new SqlConnection(ConString.ConnectionString);
     }
 
     private async Task Connect()
