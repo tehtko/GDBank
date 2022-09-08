@@ -1,4 +1,4 @@
-@model AccountModel
+@model LoginModel
 
 <main class="flex-shrink-0 h-100">
     <!-- Page content-->
@@ -19,7 +19,7 @@
                                 <label for="email">Email</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input asp-for="Password" class="form-control" placeholder="Password" />
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
                                 <label for="phone">Password</label>
                             </div>
                             <div class="d-grid"><button class="btn btn-danger btn-lg" id="submitButton"
