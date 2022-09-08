@@ -1,12 +1,14 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using GDBank.Models;
+using GDBank.Services;
 
 namespace GDBank.Controllers;
 
 public class AccountController : Controller
 {
     private readonly ILogger<AccountController> _logger;
+    private AccountService accountService = new();
 
     public AccountController(ILogger<AccountController> logger)
     {
@@ -15,14 +17,14 @@ public class AccountController : Controller
 
     public IActionResult Login(AccountModel user)
     {
-        return View("Account");
+        if (accountService.ValidateLogin(user) is false)
+            return View("Index");
+        else
+            return View("Account");
     }
 
     public IActionResult Signup(AccountCreationModel user)
     {
-        if (false == false)
-            return View("Index");                
-        else
-            return View("Account");
+        return View("Index");
     }
 }
