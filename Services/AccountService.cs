@@ -6,8 +6,11 @@ namespace GDBank.Services;
 
 public class AccountService
 {
-    public bool CreateUser(AccountModel user)
+    public bool CreateUser(AccountCreationModel user)
     {
+        if (user.Password is null)
+            return false;
+
         try
         {
             GDContext context = new();
@@ -48,7 +51,7 @@ public class AccountService
 
             context.connection.Open();
 
-            SqlCommand command = new($"SELECT username, password FROM FlashTyperUsers WHERE username = '{user.Email}' AND password = '{password}';", context.connection);
+            SqlCommand command = new($"SELECT email, password FROM FlashTyperUsers WHERE email = '{user.Email}' AND password = '{password}';", context.connection);
 
             dataReader = command.ExecuteReader();
 
