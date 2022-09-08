@@ -25,6 +25,9 @@ public class AccountController : Controller
 
     public IActionResult Signup(AccountCreationModel user)
     {
-        return View("Index");
+        if (accountService.CreateUser(user) is false)
+            return View("Index");
+        else
+            return View("Account");
     }
 }
