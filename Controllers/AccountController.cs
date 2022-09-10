@@ -39,4 +39,14 @@ public class AccountController : Controller
         else
             return RedirectToAction("Profile");
     }
+
+    public IActionResult CreateCreditCard(ICreditModel credit, AccountModel user)
+    {
+        return RedirectToAction("Profile");
+    }
+
+    public IActionResult CreateDebitCard(IDebitModel credit, AccountModel user)
+    {
+        return RedirectToAction("Profile");
+    }
 }
