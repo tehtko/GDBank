@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using GDBank.Models;
 using GDBank.Services;
+using Newtonsoft.Json;
 
 namespace GDBank.Controllers;
 
@@ -24,28 +25,36 @@ public class AccountController : Controller
         return View("Account");
     }
 
-    public IActionResult Login(AccountModel user)
-    {
-        if (accountService.ValidateLogin(user) is false)
-            return RedirectToAction("Index");
-        else
-            return RedirectToAction("Profile");
-    }
-
     public IActionResult Signup(AccountCreationModel user)
     {
         if (accountService.CreateUser(user) is false)
             return RedirectToAction("Index");
-        else
-            return RedirectToAction("Profile");
+        
+
+        return RedirectToAction("Profile");
     }
 
-    public IActionResult CreateCreditCard(ICreditModel credit, AccountModel user)
+    public IActionResult Login(AccountModel user)
+    {
+        if (accountService.ValidateLogin(user) is false)
+            return RedirectToAction("Index");
+        
+        HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
+        return RedirectToAction("Profile");
+    }
+
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult CreateCreditCard(ICreditModel credit)
     {
         return RedirectToAction("Profile");
     }
 
-    public IActionResult CreateDebitCard(IDebitModel credit, AccountModel user)
+    public IActionResult CreateDebitCard(IDebitModel credit)
     {
         return RedirectToAction("Profile");
     }
