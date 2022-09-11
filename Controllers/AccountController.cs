@@ -30,8 +30,7 @@ public class AccountController : Controller
         if (accountService.CreateUser(user) is false)
             return RedirectToAction("Index");
         
-
-        return RedirectToAction("Profile");
+        return View("Login");
     }
 
     public IActionResult Login(AccountModel user)
@@ -47,6 +46,18 @@ public class AccountController : Controller
     {
         HttpContext.Session.Clear();
         return RedirectToAction("Index");
+    }
+
+    public IActionResult Apply()
+    {
+        try // Check if the user is signed in so they can create a card
+        {
+            JsonConvert.DeserializeObject<AccountModel>(
+            HttpContext.Session.GetString("UserSession"));
+
+            return View();
+        }
+        catch (ArgumentNullException) { return View("Login"); }
     }
 
     public IActionResult CreateCreditCard(ICreditModel credit)

@@ -41,17 +41,14 @@ public class HomeController : Controller
 
     public IActionResult Login()
     {
-        // Check if the user is already signed in
-        try
+        try // Check if the user is already signed in
         {
             JsonConvert.DeserializeObject<AccountModel>(
             HttpContext.Session.GetString("UserSession"));
 
             return RedirectToAction("Account");
         }
-        catch (ArgumentNullException) { }
-
-        return View();
+        catch (ArgumentNullException) { return View(); } // Otherwise proceed to login page
     }
 
     public IActionResult Sign()
