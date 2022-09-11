@@ -20,9 +20,9 @@ public class AccountController : Controller
         return View();
     }
 
-    public IActionResult Profile()
+    public IActionResult Account()
     {
-        return View("Account");
+        return View();
     }
 
     public IActionResult Signup(AccountCreationModel user)
@@ -40,7 +40,7 @@ public class AccountController : Controller
             return RedirectToAction("Index");
         
         HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
-        return RedirectToAction("Profile");
+        return RedirectToAction("Account");
     }
 
     public IActionResult Logout()
@@ -51,11 +51,11 @@ public class AccountController : Controller
 
     public IActionResult CreateCreditCard(ICreditModel credit)
     {
-        return RedirectToAction("Profile");
+        return RedirectToAction("Account");
     }
 
     public IActionResult CreateDebitCard(IDebitModel debit)
     {
-        return RedirectToAction("Profile");
+        return RedirectToAction("Account");
     }
 }
