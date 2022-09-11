@@ -54,7 +54,7 @@ public class AccountController : Controller
         return RedirectToAction("Profile");
     }
 
-    public IActionResult CreateDebitCard(IDebitModel credit)
+    public IActionResult CreateDebitCard(IDebitModel debit)
     {
         return RedirectToAction("Profile");
     }
