@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using GDBank.Models;
+using Newtonsoft.Json;
 
 namespace GDBank.Controllers;
 
@@ -40,6 +41,16 @@ public class HomeController : Controller
 
     public IActionResult Login()
     {
+        // Check if the user is already signed in
+        try
+        {
+            JsonConvert.DeserializeObject<AccountModel>(
+            HttpContext.Session.GetString("UserSession"));
+
+            return RedirectToAction("Account");
+        }
+        catch (ArgumentNullException) { }
+
         return View();
     }
 
