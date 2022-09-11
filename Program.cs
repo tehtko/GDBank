@@ -1,7 +1,17 @@
+using Serilog;
+using Serilog.Formatting;
+using Serilog.Formatting.Display;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information()
+            .WriteTo.Console()
+            .WriteTo.File("D:\\GDlogs.txt")
+            .CreateLogger();
 
 // Disconect the user if they have been idle for more than 10 minutes
 builder.Services.AddSession(options =>
