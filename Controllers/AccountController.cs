@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GDBank.Models;
 using GDBank.Services;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace GDBank.Controllers;
 
@@ -29,8 +30,10 @@ public class AccountController : Controller
     {
         if (accountService.CreateUser(user) is false)
             return RedirectToAction("Index");
-        
-        return View("Login");
+
+        Log.Information("Account {0} created at {1}", user.Email, DateTime.UtcNow);
+        HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
+        return RedirectToAction("Account");
     }
 
     public IActionResult Login(AccountModel user)
