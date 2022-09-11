@@ -40,14 +40,23 @@ public class AccountController : Controller
     {
         if (accountService.ValidateLogin(user) is false)
             return RedirectToAction("Index");
-        
+
+        Log.Information("User {0} logged in at {1}", user.Email, DateTime.UtcNow);
         HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
         return RedirectToAction("Account");
     }
 
     public IActionResult Logout()
     {
-        HttpContext.Session.Clear();
+        try
+        {
+            AccountModel user = JsonConvert.DeserializeObject<AccountModel>(
+            HttpContext.Session.GetString("UserSession"));
+            Log.Information("User {0} logged out at {1}", user.Email, DateTime.UtcNow);
+            HttpContext.Session.Clear();
+        }
+        catch (ArgumentNullException) { }
+
         return RedirectToAction("Index");
     }
 
@@ -65,11 +74,13 @@ public class AccountController : Controller
 
     public IActionResult CreateCreditCard(ICreditModel credit)
     {
+        Log.Information("Credit card {0} created at {1} for user {2}", credit.Id, DateTime.UtcNow, credit.AccountId);
         return RedirectToAction("Account");
     }
 
     public IActionResult CreateDebitCard(IDebitModel debit)
     {
+        Log.Information("Debit card {0} created at {1} for user {2}", debit.Id, DateTime.UtcNow, debit.AccountId);
         return RedirectToAction("Account");
     }
 }

@@ -44,7 +44,7 @@ public class HomeController : Controller
         try // Check if the user is already signed in
         {
             JsonConvert.DeserializeObject<AccountModel>(
-            HttpContext.Session.GetString("UserSession"));
+                HttpContext.Session.GetString("UserSession"));
 
             return RedirectToAction("Account");
         }
