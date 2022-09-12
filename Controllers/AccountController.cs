@@ -29,9 +29,11 @@ public class AccountController : Controller
 
     public IActionResult Signup(AccountCreationModel user)
     {
+        // If unable to create the account redirect the user to the homepage
         if (accountService.CreateUser(user) is false)
             return RedirectToAction("Index");
 
+        // Log and set session state if signup was successful
         Log.Information("Account {0} created at {1}", user.Email, DateTime.UtcNow);
         HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
         return RedirectToAction("Account");
@@ -39,9 +41,11 @@ public class AccountController : Controller
 
     public IActionResult Login(AccountModel user)
     {
+        // If unable to login redirect the user to the homepage
         if (accountService.ValidateLogin(user) is false)
             return RedirectToAction("Index");
 
+        // Log and set session state if login was successful
         Log.Information("User {0} logged in at {1}", user.Email, DateTime.UtcNow);
         HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
         return RedirectToAction("Account");
@@ -49,6 +53,7 @@ public class AccountController : Controller
 
     public IActionResult Logout()
     {
+        // Make sure the user is logged in before attempting to clear all sessions
         try
         {
             AccountModel user = JsonConvert.DeserializeObject<AccountModel>(
