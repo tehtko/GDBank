@@ -1,6 +1,7 @@
 using GDBank.Data;
 using GDBank.Models;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace GDBank.Services;
 
@@ -68,6 +69,38 @@ public class AccountService
         catch (Exception)
         {
             return false;
+        }
+    }
+
+    public AccountModel GetUser(string email)
+    {
+        try
+        {
+            AccountModel model = null;
+            GDContext context = new();
+            SqlDataReader dataReader;
+
+            context.connection.Open();
+
+            SqlCommand command = new($"SELECT full_name, id FROM GDUsers WHERE email = '{email}'", context.connection);
+
+            dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                model = new AccountModel
+                {
+                    FullName = dataReader.GetString(0),
+                    Email = email,
+                    Id = dataReader.GetInt32(1)
+                };
+            }
+
+            return model;
+        }
+        catch (Exception)
+        {
+            return null;
         }
     }
 }
