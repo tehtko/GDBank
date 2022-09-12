@@ -9,11 +9,11 @@ namespace GDBank.Controllers;
 
 public class AccountController : Controller
 {
-    private readonly ILogger<AccountController> _logger;
+    private readonly ILogger<AccountController> logger;
     private AccountService accountService = new();
-    public AccountController(ILogger<AccountController> logger)
+    public AccountController(ILogger<AccountController> _logger)
     {
-        _logger = logger;
+        logger = _logger;
     }
 
     public IActionResult Index()
