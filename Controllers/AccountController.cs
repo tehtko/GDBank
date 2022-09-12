@@ -80,7 +80,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public IActionResult Apply(CardApplicationModel)
+    public IActionResult Apply(CardApplicationModel model)
     {
         return View();
     }
