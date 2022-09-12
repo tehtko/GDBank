@@ -6,10 +6,11 @@ using Newtonsoft.Json;
 using Serilog;
 
 namespace GDBank.Controllers;
-#pragma warning disable CS8600, CS8604
 
 public class AccountController : Controller
 {
+#pragma warning disable CS8600, CS8604
+
     private readonly ILogger<AccountController> logger;
     private AccountService accountService = new();
     public AccountController(ILogger<AccountController> _logger)
@@ -53,8 +54,7 @@ public class AccountController : Controller
 
     public IActionResult Logout()
     {
-        // Make sure the user is logged in before attempting to clear all sessions
-        try
+        try // Make sure the user is logged in before attempting to clear all sessions
         {
             AccountModel user = JsonConvert.DeserializeObject<AccountModel>(
             HttpContext.Session.GetString("UserSession"));
@@ -70,10 +70,10 @@ public class AccountController : Controller
     {
         try // Check if the user is signed in so they can create a card
         {
-            JsonConvert.DeserializeObject<AccountModel>(
-            HttpContext.Session.GetString("UserSession"));
+            var user = accountService.GetUser(JsonConvert.DeserializeObject<AccountModel>(
+            HttpContext.Session.GetString("UserSession")).Email);
 
-            return View();
+            return View("Apply", new CardApplicationModel { FullName = user.FullName, Email = user.Email, AccountId = user.Id });
         }
         catch (ArgumentNullException) { return View("Login"); }
     }
