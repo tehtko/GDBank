@@ -1,0 +1,83 @@
+@model CardApplicationModel
+
+<style>
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+</style>
+
+<main class="flex-shrink-0">
+    <!-- Page content-->
+    <section class="py-5">
+        <div class="container px-5">
+            <!-- Contact form-->
+            <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                <div class="mb-5">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <h1 class="fw-bolder">Your financial journey starts here.</h1>
+                </div>
+                <div class="row gx-5 justify-content-left">
+                    <div class="col-lg-8 col-xl-6">
+                        <form asp-controller="Account" asp-action="Signup" method="post">
+                            <div class="form-floating mb-3">
+                                <input asp-for="FullName" autocomplete="off" readonly="true" class="form-control user-select-none" value="@Model.FullName"/>
+                                <label for="name">Full name</label>
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Email" autocomplete="off" readonly="true" class="form-control user-select-none" value="@Model.Email"/>
+                                <label for="email">Email address</label>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="AccountId" autocomplete="off" type="text" readonly="true" class="form-control user-select-none" value="@Model.AccountId" />
+                                <label for="phone">Account Id</label>
+                                <span asp-validation-for="AccountId" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select asp-for="CardType" autocomplete="off" class="form-control" placeholder="Confirm Password">
+                                    <option value="credit">Credit</option>
+                                    <option value="debit">Debit</option>
+                                </select>
+                                <label for="phone">Card Type</label>
+                                <span asp-validation-for="CardType" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select asp-for="AccountType" autocomplete="off" class="form-control" placeholder="Confirm Password">
+                                    <option value="cashback">Cashback</option>
+                                    <option value="travel">Travel</option>
+                                    <option value="student">Student</option>
+                                    <option value="rewards">Rewards</option>
+                                    @if (ViewBag.CardType == "Credit")
+                                    {
+                                        <option value="business">Business</option>
+                                    }
+                                </select>
+                                <label for="phone">Account Type</label>
+                                <span asp-validation-for="AccountType" class="text-danger"></span>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-danger btn-lg" id="submitButton"
+                                        type="submit">
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
