@@ -66,6 +66,7 @@ public class AccountController : Controller
         return RedirectToAction("Index");
     }
 
+    [HttpGet]
     public IActionResult Apply()
     {
         try // Check if the user is signed in so they can create a card
@@ -76,6 +77,12 @@ public class AccountController : Controller
             return View("Apply", new CardApplicationModel { FullName = user.FullName, Email = user.Email, AccountId = user.Id });
         }
         catch (ArgumentNullException) { return View("Login"); }
+    }
+
+    [HttpPost]
+    public IActionResult Apply(CardApplicationModel)
+    {
+        return View();
     }
 
     public IActionResult CreateCreditCard(ICreditModel credit)
