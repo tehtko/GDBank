@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Serilog;
 
 namespace GDBank.Controllers;
+#pragma warning disable CS8600, CS8604
 
 public class AccountController : Controller
 {
