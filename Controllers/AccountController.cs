@@ -32,8 +32,8 @@ public class AccountController : Controller
         // If unable to create the account redirect the user to the homepage
         if (accountService.CreateUser(user) is false)
         {
-            ViewBag.SignupError = "This e-mail is taken";
-            return View();
+            ViewBag.AccountError = "This email is already taken";
+            return View("Sign");
         }
             
         // Log and set session state if signup was successful
@@ -47,7 +47,7 @@ public class AccountController : Controller
         // If unable to login redirect the user to the homepage
         if (accountService.ValidateLogin(user) is false)
         {
-            ViewBag.SignupError = "Username or password is incorrect";
+            ViewBag.AccountError = "Username or password is incorrect";
             return View();
         }
             
