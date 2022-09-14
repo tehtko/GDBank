@@ -9,8 +9,7 @@ namespace GDBank.Controllers;
 
 public class AccountController : Controller
 {
-#pragma warning disable CS8600, CS8604
-
+#pragma warning disable CS8600, CS8602, CS8604,
     private readonly ILogger<AccountController> logger;
     private AccountService accountService = new();
     public AccountController(ILogger<AccountController> _logger)
