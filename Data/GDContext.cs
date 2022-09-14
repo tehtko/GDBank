@@ -8,7 +8,7 @@ public class GDContext
 
     public GDContext()
     {
-        connection = new SqlConnection(ConString.ConnectionString);
+        connection = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=local;Integrated Security=SSPI;");
     }
 
     private async Task Connect()
