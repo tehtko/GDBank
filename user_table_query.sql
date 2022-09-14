@@ -1,0 +1,8 @@
+CREATE TABLE [dbo].[GDUsers] (
+    [id]        INT           IDENTITY (727, 21) NOT NULL,
+    [full_name] VARCHAR (255) NOT NULL,
+    [email]     VARCHAR (255) NOT NULL,
+    [password]  VARCHAR (255) NOT NULL,
+    CONSTRAINT [PK__GDUsers__3213E83F596C7FCD] PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [UQ__GDUsers__AB6E6164AD0B288F] UNIQUE NONCLUSTERED ([email] ASC)
+);
