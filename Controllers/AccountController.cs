@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using GDBank.Models;
 using GDBank.Services;
@@ -65,8 +64,7 @@ public class AccountController : Controller
             HttpContext.Session.GetString("UserSession"));
             Log.Information("User {0} logged out at {1}", user.Email, DateTime.UtcNow);
             HttpContext.Session.Clear();
-        }
-        catch (ArgumentNullException) { }
+        } catch (ArgumentNullException) { }
 
         return RedirectToAction("Index");
     }
@@ -80,8 +78,7 @@ public class AccountController : Controller
             HttpContext.Session.GetString("UserSession")).Email);
 
             return View("Apply", new CardApplicationModel { FullName = user.FullName, Email = user.Email, AccountId = user.Id });
-        }
-        catch (ArgumentNullException) { return View("Login"); }
+        } catch (ArgumentNullException) { return View("Login"); }
     }
 
     [HttpPost]
