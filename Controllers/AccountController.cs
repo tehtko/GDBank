@@ -61,7 +61,7 @@ public class AccountController : Controller
         try // Make sure the user is logged in before attempting to clear all sessions
         {
             AccountModel user = JsonConvert.DeserializeObject<AccountModel>(
-            HttpContext.Session.GetString("UserSession"));
+                HttpContext.Session.GetString("UserSession"));
             Log.Information("User {0} logged out at {1}", user.Email, DateTime.UtcNow);
             HttpContext.Session.Clear();
         } catch (ArgumentNullException) { }
