@@ -1,6 +1,6 @@
 ﻿namespace GDBank.Models.Credit
 {
-    public class CashbackCreditModel : ICreditModel
+    public class CashbackCreditModel : ICardModel
     {
         public int Id { get; set; }
         public float Balance { get; set; } = 0;
@@ -11,11 +11,5 @@
         public float MonthlyFee { get; set; } = 50.00f;
         public float InterestRate { get; set; } = 1.2f;
         public int AccountId { get; set; }
-
-        public CashbackCreditModel(AccountModel user)
-        {
-            CardHolder = user.FullName;
-            AccountId = user.Id;
-        }
     }
 }

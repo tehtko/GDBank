@@ -1,6 +1,6 @@
 namespace GDBank.Models;
 
-public interface ICreditModel
+public interface ICardModel
 {
     public int Id { get; set; }
     public float Balance { get; set; }
