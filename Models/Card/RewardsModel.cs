@@ -1,6 +1,6 @@
 ﻿namespace GDBank.Models.Card
 {
-    public class CashbackModel : ICardModel
+    public class RewardsModel : ICardModel
     {
         public int Id { get; set; }
         public int CardType { get; set; }
@@ -14,21 +14,17 @@
         public int OverdraftProtection { get; set; }
         public int AccountId { get; set; }
 
-        public CashbackModel(CardApplicationModel model)
+        public RewardsModel(CardApplicationModel model)
         {
             CardType = model.CardType;
             Balance = 1000; // new cards start with $1000 for demo purposes
             MonthLimit = 1500;
             AccountType = model.AccountType;
             CardHolder = model.FullName;
-            CashBack = 3.00f;
-            MonthlyFee = 50;
-
-            if (model.CardType == 1)
-                InterestRate = 1.2f;
-            else
-                InterestRate = 0;
-
+            CashBack = 5.00f;
+            MonthlyFee = 75;
+            InterestRate = 1.2f;
+            
             if (model.CardType == 0)
                 OverdraftProtection = 1;
             else
