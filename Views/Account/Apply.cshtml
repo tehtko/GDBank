@@ -14,7 +14,7 @@
                 </div>
                 <div class="row gx-5 justify-content-left">
                     <div class="col-lg-8 col-xl-6">
-                        <form asp-controller="Account" asp-action="Signup" method="post">
+                        <form asp-controller="Account" asp-action="Apply" method="post">
                             <div class="form-floating mb-3">
                                 <input asp-for="FullName" autocomplete="off" readonly="true" class="form-control user-select-none" value="@Model.FullName"/>
                                 <label for="name">Full name</label>
@@ -32,21 +32,21 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <select asp-for="CardType" autocomplete="off" class="form-control" placeholder="Confirm Password">
-                                    <option value="credit">Credit</option>
-                                    <option value="debit">Debit</option>
+                                    <option value=0>Debit</option>
+                                    <option value=1>Credit</option>
                                 </select>
                                 <label for="phone">Card Type</label>
                                 <span asp-validation-for="CardType" class="text-danger"></span>
                             </div>
                             <div class="form-floating mb-3">
                                 <select asp-for="AccountType" autocomplete="off" class="form-control" placeholder="Confirm Password">
-                                    <option value="cashback">Cashback</option>
-                                    <option value="travel">Travel</option>
-                                    <option value="student">Student</option>
-                                    <option value="rewards">Rewards</option>
+                                    <option value=1>Cashback</option>
+                                    <option value=2>Travel</option>
+                                    <option value=3>Student</option>
+                                    <option value=4>Rewards</option>
                                     @if (ViewBag.CardType == "Credit")
                                     {
-                                        <option value="business">Business</option>
+                                        <option value=5>Business</option>
                                     }
                                 </select>
                                 <label for="phone">Account Type</label>
