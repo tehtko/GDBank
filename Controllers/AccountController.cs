@@ -3,6 +3,7 @@ using GDBank.Models;
 using GDBank.Services;
 using Newtonsoft.Json;
 using Serilog;
+using GDBank.Models.Card;
 
 namespace GDBank.Controllers;
 
@@ -34,7 +35,7 @@ public class AccountController : Controller
             ViewBag.AccountError = "This email is already taken";
             return View("Sign");
         }
-            
+
         // Log and set session state if signup was successful
         Log.Information("Account {0} created at {1}", user.Email, DateTime.UtcNow);
         HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
@@ -49,7 +50,7 @@ public class AccountController : Controller
             ViewBag.AccountError = "Username or password is incorrect";
             return View();
         }
-            
+
         // Log and set session state if login was successful
         Log.Information("User {0} logged in at {1}", user.Email, DateTime.UtcNow);
         HttpContext.Session.SetString("UserSession", JsonConvert.SerializeObject(user));
@@ -64,32 +65,71 @@ public class AccountController : Controller
                 HttpContext.Session.GetString("UserSession"));
             Log.Information("User {0} logged out at {1}", user.Email, DateTime.UtcNow);
             HttpContext.Session.Clear();
-        } catch (ArgumentNullException) { }
+        }
+        catch (ArgumentNullException) { }
 
         return RedirectToAction("Index");
     }
 
     [HttpGet]
-    public IActionResult Apply()
+    public IActionResult ApplyDebit()
     {
         try // Check if the user is signed in so they can create a card
         {
             var user = accountService.GetUser(JsonConvert.DeserializeObject<AccountModel>(
             HttpContext.Session.GetString("UserSession")).Email);
 
-            return View("Apply", new CardApplicationModel { FullName = user.FullName, Email = user.Email, AccountId = user.Id });
-        } catch (ArgumentNullException) { return View("Login"); }
+            return View("ApplyDebit", new CardApplicationModel { FullName = user.FullName, Email = user.Email, AccountId = user.Id, CardType = "Debit" });
+        }
+        catch (ArgumentNullException) { return View("Login"); }
     }
 
-    [HttpPost]
+    [HttpGet]
+    public IActionResult ApplyCredit()
+    {
+        try // Check if the user is signed in so they can create a card
+        {
+            var user = accountService.GetUser(JsonConvert.DeserializeObject<AccountModel>(
+            HttpContext.Session.GetString("UserSession")).Email);
+
+            return View("ApplyCredit", new CardApplicationModel { FullName = user.FullName, Email = user.Email, AccountId = user.Id, CardType = "Credit" });
+        }
+        catch (ArgumentNullException) { return View("Login"); }
+    }
+
     public IActionResult Apply(CardApplicationModel model)
     {
-        return View();
+        switch (model.AccountType)
+        {
+            case "Cashback": 
+                CreateCard(new CashbackModel(model));
+                break;
+            case "Travel":
+                CreateCard(new TravelModel(model));
+                break;
+            case "Student":
+                CreateCard(new StudentModel(model));
+                break;
+            case "Rewards":
+                CreateCard(new RewardsModel(model));
+                break;
+            case "Business":
+                CreateCard(new BusinessModel(model));
+                break;
+        }
+
+        return View("Account");
     }
 
     public IActionResult CreateCard(ICardModel card)
     {
-        Log.Information("Credit card {0} created at {1} for user {2}", card.Id, DateTime.UtcNow, credit.AccountId);
+        if (accountService.CreateCard(card) is false)
+        {
+            ViewBag.Error = "Couldn't process your request at this time";
+            return View("Profile");
+        }
+
+        Log.Information("{0} card {1} created at {2} for user {3}", card.CardType, card.Id, DateTime.UtcNow, card.AccountId);
         return RedirectToAction("Account");
     }
 
