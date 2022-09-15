@@ -87,15 +87,10 @@ public class AccountController : Controller
         return View();
     }
 
-    public IActionResult CreateCreditCard(ICreditModel credit)
+    public IActionResult CreateCard(ICardModel card)
     {
-        Log.Information("Credit card {0} created at {1} for user {2}", credit.Id, DateTime.UtcNow, credit.AccountId);
+        Log.Information("Credit card {0} created at {1} for user {2}", card.Id, DateTime.UtcNow, credit.AccountId);
         return RedirectToAction("Account");
     }
 
-    public IActionResult CreateDebitCard(IDebitModel debit)
-    {
-        Log.Information("Debit card {0} created at {1} for user {2}", debit.Id, DateTime.UtcNow, debit.AccountId);
-        return RedirectToAction("Account");
-    }
 }
