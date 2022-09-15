@@ -10,6 +10,7 @@ public interface ICardModel
     public float? CashBack { get; set; }
     public float MonthlyFee { get; set; }
     public float InterestRate { get; set; }
+    public int OverdraftProtection { get; set; }
 
     public int AccountId { get; set; }
 }
