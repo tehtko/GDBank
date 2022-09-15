@@ -103,4 +103,12 @@ public class AccountService
             return null;
         }
     }
+
+    public bool CreateCard(ICardModel card)
+    {
+        try
+        {
+            return true;
+        } catch(Exception) { return false; }
+    }
 }
