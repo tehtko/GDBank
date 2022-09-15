@@ -3,10 +3,10 @@
     public class TravelModel : ICardModel
     {
         public int Id { get; set; }
-        public int CardType { get; set; }
+        public string CardType { get; set; }
         public float Balance { get; set; }
         public int MonthLimit { get; set; }
-        public int AccountType { get; set; }
+        public string AccountType { get; set; }
         public string CardHolder { get; set; }
         public float CashBack { get; set; }
         public float MonthlyFee { get; set; }
@@ -16,7 +16,7 @@
 
         public TravelModel(CardApplicationModel model)
         {
-            CardType = 1;
+            CardType = model.CardType;
             Balance = 1000; // new cards start with $1000 for demo purposes
             MonthLimit = 10000;
             AccountType = model.AccountType;

@@ -3,10 +3,10 @@
     public class RewardsModel : ICardModel
     {
         public int Id { get; set; }
-        public int CardType { get; set; }
+        public string CardType { get; set; }
         public float Balance { get; set; }
         public int MonthLimit { get; set; }
-        public int AccountType { get; set; }
+        public string AccountType { get; set; }
         public string CardHolder { get; set; }
         public float CashBack { get; set; }
         public float MonthlyFee { get; set; }
@@ -25,7 +25,7 @@
             MonthlyFee = 75;
             InterestRate = 1.2f;
             
-            if (model.CardType == 0)
+            if (model.CardType == "Debit")
                 OverdraftProtection = 1;
             else
                 OverdraftProtection = 0;
