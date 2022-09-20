@@ -47,8 +47,7 @@ public class HomeController : Controller
                 HttpContext.Session.GetString("UserSession"));
 
             return RedirectToAction("Account");
-        }
-        catch (ArgumentNullException) { return View(); } // Otherwise proceed to login page
+        } catch (ArgumentNullException) { return View(); } // Otherwise proceed to login page
     }
 
     public IActionResult Sign()
