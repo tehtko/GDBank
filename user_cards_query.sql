@@ -1,5 +1,5 @@
 CREATE TABLE GDUsers_Cards  (
-    id INT PRIMARY KEY,
+    id INT IDENTITY (727, 21),
     card_type VARCHAR(MAX) NOT NULL,
     balance FLOAT NOT NULL,
     month_limit INT NOT NULL,
