@@ -9,5 +9,6 @@ CREATE TABLE GDUsers_Cards  (
     monthly_fee FLOAT NOT NULL,
     interest_rate FLOAT NOT NULL,
     overdraft_protection INT NOT NULL,
+    creation_date date NOT NULL,
     account_id INT NOT NULL
 );
