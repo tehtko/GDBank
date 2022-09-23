@@ -106,7 +106,10 @@ public class AccountService
 
     public bool CreateCard(ICardModel card, int id)
     {
-        if (card is null)
+        if (card.CardType == "Debit" && CheckUsersDebitCards(id) > 2)
+            return false;
+
+        if (card.CardType == "Credit" && CheckUsersCreditCards(id) > 2)
             return false;
 
         try
@@ -122,6 +125,91 @@ public class AccountService
             {
                 Connection = context.connection,
                 CommandText = $"INSERT INTO GDUsers_Cards (card_type, balance, month_limit, account_name, card_holder, cashback, monthly_fee, interest_rate, overdraft_protection, creation_date, account_id) VALUES ('{card.CardType}', '{card.Balance}', '{card.MonthLimit}', '{card.AccountType}', '{card.CardHolder}', '{card.CashBack}', '{card.MonthlyFee}', '{card.InterestRate}', '{card.OverdraftProtection}', '{date}', '{id}')"
+            };
+
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+
+            command.Dispose();
+            context.connection.Close();
+
+            return true;
+        }
+        catch (SqlException)
+        {
+            return false;
+        }
+    }
+
+    public int CheckUsersDebitCards(int id)
+    {
+        int count = 0;
+        try
+        {
+            GDContext context = new();
+            SqlDataReader dataReader;
+
+            context.connection.Open();
+
+            SqlCommand command = new($"SELECT id FROM GDUsers_Cards WHERE account_id = '{id}' AND card_type = 'Debit'", context.connection);
+
+            dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                count++;
+            }
+
+            return count;
+        }
+        catch (Exception)
+        {
+            return 0;
+        }
+    }
+
+    public int CheckUsersCreditCards(int id)
+    {
+        int count = 0;
+        try
+        {
+            GDContext context = new();
+            SqlDataReader dataReader;
+
+            context.connection.Open();
+
+            SqlCommand command = new($"SELECT id FROM GDUsers_Cards WHERE account_id = '{id}' AND card_type = 'Credit'", context.connection);
+
+            dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                count++;
+            }
+
+            return count;
+        }
+        catch (Exception)
+        {
+            return 0;
+        }
+    }
+
+    public bool DeleteCard(int id)
+    {
+        try
+        {
+            var date = DateTime.Now.ToString("yyyy-MM-dd");
+
+            GDContext context = new();
+            SqlDataAdapter adapter = new();
+
+            context.connection.Open();
+
+            SqlCommand command = new()
+            {
+                Connection = context.connection,
+                CommandText = $"DELETE FROM GDUsers_Cards WHERE id = '{id}'"
             };
 
             adapter.InsertCommand = command;
