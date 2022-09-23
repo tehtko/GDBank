@@ -1,4 +1,61 @@
 <main class="flex-shrink-0">
+    <h2>Profile</h2>
+    <h3>Your debit cards</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Card #</th>
+                <th scope="col">Type</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">412321</th>
+                <td>Rewards</td>
+                <td>$727.21</td>
+                <td>Delete</td>
+            </tr>
+            <tr>
+                <th scope="row">32312</th>
+                <td>Cashback</td>
+                <td>$400.19</td>
+                <td>Delete</td>
+            </tr>
+            <tr>
+                <th scope="row">727</th>
+                <td>Student</td>
+                <td>$15.32</td>
+                <td>Delete</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Your credit cards</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Card #</th>
+                <th scope="col">Type</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">412321</th>
+                <td>Rewards</td>
+                <td>$727.21</td>
+                <td>Delete</td>
+            </tr>
+            <tr>
+                <th scope="row">727</th>
+                <td>Business</td>
+                <td>$15.32</td>
+                <td>Delete</td>
+            </tr>
+        </tbody>
+    </table>
     <p>@ViewBag.Error</p>
     <a asp-controller="Account" asp-action="Logout">Logout</a>
 </main>
