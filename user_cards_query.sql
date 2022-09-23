@@ -1,6 +1,6 @@
 CREATE TABLE GDUsers_Cards  (
     id INT PRIMARY KEY,
-    card_type INT NOT NULL,
+    card_type VARCHAR(MAX) NOT NULL,
     balance FLOAT NOT NULL,
     month_limit INT NOT NULL,
     account_name VARCHAR(MAX) NOT NULL,
