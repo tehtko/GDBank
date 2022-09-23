@@ -104,11 +104,37 @@ public class AccountService
         }
     }
 
-    public bool CreateCard(ICardModel card)
+    public bool CreateCard(ICardModel card, int id)
     {
+        if (card is null)
+            return false;
+
         try
         {
+            var date = DateTime.Now.ToString("yyyy-MM-dd");
+
+            GDContext context = new();
+            SqlDataAdapter adapter = new();
+
+            context.connection.Open();
+
+            SqlCommand command = new()
+            {
+                Connection = context.connection,
+                CommandText = $"INSERT INTO GDUsers_Cards (card_type, balance, month_limit, account_name, card_holder, cashback, monthly_fee, interest_rate, overdraft_protection, creation_date, account_id) VALUES ('{card.CardType}', '{card.Balance}', '{card.MonthLimit}', '{card.AccountType}', '{card.CardHolder}', '{card.CashBack}', '{card.MonthlyFee}', '{card.InterestRate}', '{card.OverdraftProtection}', '{date}', '{id}')"
+            };
+
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+
+            command.Dispose();
+            context.connection.Close();
+
             return true;
-        } catch(Exception) { return false; }
+        }
+        catch (SqlException)
+        {
+            return false;
+        }
     }
 }
