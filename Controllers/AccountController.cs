@@ -102,28 +102,28 @@ public class AccountController : Controller
         switch (model.AccountType)
         {
             case "Cashback": 
-                CreateCard(new CashbackModel(model));
+                CreateCard(new CashbackModel(model), model.AccountId);
                 break;
             case "Travel":
-                CreateCard(new TravelModel(model));
+                CreateCard(new TravelModel(model), model.AccountId);
                 break;
             case "Student":
-                CreateCard(new StudentModel(model));
+                CreateCard(new StudentModel(model), model.AccountId);
                 break;
             case "Rewards":
-                CreateCard(new RewardsModel(model));
+                CreateCard(new RewardsModel(model), model.AccountId);
                 break;
             case "Business":
-                CreateCard(new BusinessModel(model));
+                CreateCard(new BusinessModel(model), model.AccountId);
                 break;
         }
 
         return View("Account");
     }
 
-    public IActionResult CreateCard(ICardModel card)
+    public IActionResult CreateCard(ICardModel card, int id)
     {
-        if (accountService.CreateCard(card) is false)
+        if (accountService.CreateCard(card, id) is false)
         {
             ViewBag.Error = "Couldn't process your request at this time";
             return View("Profile");
