@@ -24,7 +24,9 @@ public class AccountController : Controller
 
     public IActionResult Account()
     {
-        return View();
+        var user = JsonConvert.DeserializeObject<AccountModel>(HttpContext.Session.GetString("UserSession"));
+        List<ICardModel> cards = accountService.GetCards(user.Id);
+        return View(cards);
     }
 
     public IActionResult Signup(AccountCreationModel user)
@@ -132,5 +134,4 @@ public class AccountController : Controller
         Log.Information("{0} card {1} created at {2} for user {3}", card.CardType, card.Id, DateTime.UtcNow, card.AccountId);
         return RedirectToAction("Account");
     }
-
 }
