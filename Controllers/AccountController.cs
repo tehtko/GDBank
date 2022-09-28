@@ -24,9 +24,13 @@ public class AccountController : Controller
 
     public IActionResult Account()
     {
-        var user = JsonConvert.DeserializeObject<AccountModel>(HttpContext.Session.GetString("UserSession"));
-        List<ICardModel> cards = accountService.GetCards(user.Id);
-        return View(cards);
+        try
+        {
+            var user = accountService.GetUser(JsonConvert.DeserializeObject<AccountModel>(HttpContext.Session.GetString("UserSession")).Email);
+            List<ICardModel> cards = accountService.GetCards(user.Id);
+            return View(cards);
+        }
+        catch (ArgumentNullException) { return View("Login"); }
     }
 
     public IActionResult Signup(AccountCreationModel user)
@@ -103,7 +107,7 @@ public class AccountController : Controller
     {
         switch (model.AccountType)
         {
-            case "Cashback": 
+            case "Cashback":
                 CreateCard(new CashbackModel(model), model.AccountId);
                 break;
             case "Travel":
@@ -120,7 +124,7 @@ public class AccountController : Controller
                 break;
         }
 
-        return View("Account");
+        return RedirectToAction("Account");
     }
 
     public IActionResult CreateCard(ICardModel card, int id)
