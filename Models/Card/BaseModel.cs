@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string CardType { get; set; }
-        public float Balance { get; set; }
+        public double Balance { get; set; }
         public int MonthLimit { get; set; }
         public string AccountType { get; set; }
         public string CardHolder { get; set; }
