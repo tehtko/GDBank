@@ -207,7 +207,7 @@ public class AccountService
 
             context.connection.Open();
 
-            SqlCommand command = new($"SELECT id, balance, account_name FROM GDUsers_Cards WHERE account_id = '{id}'", context.connection);
+            SqlCommand command = new($"SELECT id, balance, account_name, card_type FROM GDUsers_Cards WHERE account_id = '{id}'", context.connection);
 
             dataReader = command.ExecuteReader();
 
@@ -217,7 +217,8 @@ public class AccountService
                 {
                     Id = dataReader.GetInt32(0),
                     Balance = dataReader.GetDouble(1),
-                    AccountType = dataReader.GetString(2)
+                    AccountType = dataReader.GetString(2),
+                    CardType = dataReader.GetString(3)
                 });
             }
 
