@@ -142,6 +142,7 @@ public class AccountController : Controller
     public IActionResult DeleteCard(int id)
     {
         accountService.DeleteCard(id);
+        Log.Information("Card {1} deleted at {2}", id, DateTime.UtcNow);
         return RedirectToAction("Account");
     }
 }
