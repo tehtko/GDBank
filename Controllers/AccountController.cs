@@ -138,4 +138,10 @@ public class AccountController : Controller
         Log.Information("{0} card {1} created at {2} for user {3}", card.CardType, card.Id, DateTime.UtcNow, card.AccountId);
         return RedirectToAction("Account");
     }
+
+    public IActionResult DeleteCard(int id)
+    {
+        accountService.DeleteCard(id);
+        return RedirectToAction("Account");
+    }
 }
