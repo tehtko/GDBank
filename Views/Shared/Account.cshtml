@@ -1,3 +1,4 @@
+@using GDBank.Models.Card
 @model List<ICardModel>
 
 <main class="flex-shrink-0">
@@ -21,7 +22,7 @@
                         <th scope="row">@item.Id</th>
                         <td>@item.AccountType</td>
                         <td>@item.Balance</td>
-                        <td><a>Delete</a></td>
+                        <td><a href="@Url.Action("DeleteCard", "Account", new BaseModel { Id = item.Id })">Delete</a></td>
                     </tr>
                 }
             }
@@ -46,7 +47,7 @@
                         <th scope="row">@item.Id</th>
                         <td>@item.AccountType</td>
                         <td>@item.Balance</td>
-                        <td><a>Delete</a></td>
+                        <td><a href="@Url.Action("DeleteCard", "Account", new BaseModel { Id = item.Id })">Delete</a></td>
                     </tr>
                 }
             }
