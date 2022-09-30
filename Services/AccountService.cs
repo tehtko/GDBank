@@ -228,7 +228,6 @@ public class AccountService
         {
             return cards;
         }
-
     }
 
     public bool DeleteCard(int id)
