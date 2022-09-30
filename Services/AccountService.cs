@@ -207,7 +207,7 @@ public class AccountService
 
             context.connection.Open();
 
-            SqlCommand command = new($"SELECT * FROM GDUsers_Cards WHERE id = '{id}'", context.connection);
+            SqlCommand command = new($"SELECT id, balance, account_name FROM GDUsers_Cards WHERE account_id = '{id}'", context.connection);
 
             dataReader = command.ExecuteReader();
 
@@ -216,16 +216,8 @@ public class AccountService
                 cards.Add(new BaseModel
                 {
                     Id = dataReader.GetInt32(0),
-                    CardType = dataReader.GetString(1),
-                    Balance = dataReader.GetFloat(2),
-                    MonthLimit = dataReader.GetInt32(3),
-                    AccountType = dataReader.GetString(4),
-                    CardHolder = dataReader.GetString(5),
-                    CashBack = dataReader.GetFloat(6),
-                    MonthlyFee = dataReader.GetFloat(7),
-                    InterestRate = dataReader.GetFloat(8),
-                    OverdraftProtection = dataReader.GetInt32(9),
-                    AccountId = dataReader.GetInt32(10)
+                    Balance = dataReader.GetDouble(1),
+                    AccountType = dataReader.GetString(2)
                 });
             }
 
